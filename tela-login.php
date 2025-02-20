@@ -12,18 +12,23 @@ if(isset($_COOKIE['lembrar_email']) && isset($_COOKIE['lembrar_senha'])) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="css/login.css" rel="stylesheet">
 </head>
 <body>
+    <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
+        <i class="fas fa-sun light-icon"></i>
+        <i class="fas fa-moon dark-icon"></i>
+    </button>
+
     <!-- Adicione este HTML logo após a abertura do body -->
     <div class="loading-overlay">
         <div class="loading-content">
@@ -53,7 +58,7 @@ if(isset($_COOKIE['lembrar_email']) && isset($_COOKIE['lembrar_senha'])) {
             <div class="login-icon">
                 <i class="fas fa-user-circle"></i>
             </div>
-            <h2>Bem-vindo</h2>
+            <h2 class="animate">Bem-vindo</h2>
             <p>Faça login para acessar o sistema</p>
         </div>
         <form id="loginForm" action="validar-login" method="post">
@@ -83,7 +88,20 @@ if(isset($_COOKIE['lembrar_email']) && isset($_COOKIE['lembrar_senha'])) {
                        <?php echo ($email_salvo != '') ? 'checked' : ''; ?>>
                 <label class="form-check-label" for="lembrar">Lembrar meus dados</label>
             </div>
-            <button type="submit" class="btn btn-login">Entrar</button>
+            <div class="form-footer">
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Entrar
+                </button>
+                
+                <div class="register-link">
+                    <p>Não tem uma conta?</p>
+                    <a href="registro.php" class="btn-register">
+                        <i class="fas fa-user-plus"></i>
+                        Registrar
+                    </a>
+                </div>
+            </div>
         </form>
     </div>
 
@@ -190,5 +208,7 @@ if(isset($_COOKIE['lembrar_email']) && isset($_COOKIE['lembrar_senha'])) {
             }, 300);
         });
     </script>
+
+    <script src="js/theme.js"></script>
 </body>
 </html>

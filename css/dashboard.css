@@ -1,4 +1,16 @@
 :root {
+    /* Tema claro (padrão) */
+    --bg-primary: #f6f8fd;
+    --bg-secondary: #ffffff;
+    --bg-input: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #6c757d;
+    --border-color: #e9ecef;
+    --card-bg: #ffffff;
+    --input-border: #e0e0e0;
+    --input-bg: #ffffff;
+    --stat-card-bg: #ffffff;
+    --hover-bg: rgba(67, 97, 238, 0.05);
     --primary: #4361ee;
     --primary-dark: #3046b1;
     --secondary: #3f37c9;
@@ -6,16 +18,32 @@
     --warning: #f1c40f;
     --danger: #e74c3c;
     --info: #3498db;
+    --shadow: rgba(0, 0, 0, 0.1);
     --dark: #2c3e50;
     --gray: #95a5a6;
     --light: #f8f9fa;
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
     --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
     --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     --gradient-success: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
     --gradient-danger: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
     --gradient-info: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+}
+
+/* Tema escuro */
+[data-theme="dark"] {
+    --bg-primary: #1a1c23;
+    --bg-secondary: #242631;
+    --bg-input: #2d303e;
+    --text-primary: #e9ecef;
+    --text-secondary: #adb5bd;
+    --border-color: #2d3748;
+    --card-bg: #242631;
+    --input-border: #3d4251;
+    --input-bg: #2d303e;
+    --stat-card-bg: #2d303e;
+    --hover-bg: rgba(67, 97, 238, 0.1);
+    --shadow: rgba(0, 0, 0, 0.3);
 }
 
 /* Animações Globais */
@@ -55,9 +83,9 @@
 
 /* Layout Base com Animação */
 body {
-    background: linear-gradient(135deg, #f6f8fd 0%, #f0f2f5 100%);
+    background: var(--bg-primary);
     font-family: 'Poppins', sans-serif;
-    color: var(--dark);
+    color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
 }
@@ -109,7 +137,7 @@ body {
 }
 
 .stat-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--stat-card-bg);
     padding: 2rem;
     border-radius: 20px;
     box-shadow: var(--shadow);
@@ -120,6 +148,7 @@ body {
     position: relative;
     overflow: hidden;
     animation: fadeInUp 0.6s ease-out;
+    border: 1px solid var(--border-color);
 }
 
 .stat-card::before {
@@ -181,29 +210,30 @@ body {
     font-size: 2.2rem;
     font-weight: 700;
     margin: 0;
-    color: var(--dark);
+    color: var(--text-primary);
     line-height: 1.2;
 }
 
 .stat-info p {
     margin: 0.5rem 0 0;
-    color: var(--gray);
+    color: var(--text-secondary);
     font-size: 1rem;
     font-weight: 500;
 }
 
 /* Card Principal Aprimorado */
 .main-card {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--card-bg);
     border-radius: 20px;
     box-shadow: var(--shadow-lg);
     margin-bottom: 2rem;
     overflow: hidden;
     animation: fadeInUp 0.8s ease-out;
+    border: 1px solid var(--border-color);
 }
 
 .card-header {
-    background: var(--gradient-primary);
+    background: var(--bg-secondary);
     color: white;
     padding: 1.75rem 2rem;
     display: flex;
@@ -211,6 +241,7 @@ body {
     justify-content: space-between;
     position: relative;
     overflow: hidden;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .card-header::after {
@@ -255,27 +286,34 @@ body {
 
 .form-label {
     font-weight: 500;
-    color: var(--dark);
+    color: var(--text-primary);
     margin-bottom: 0.75rem;
     display: block;
     font-size: 0.95rem;
 }
 
-.form-control {
+.form-control, 
+.form-select, 
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+textarea {
     width: 100%;
     padding: 1rem 1.25rem;
     font-size: 1rem;
-    border: 2px solid #e9ecef;
+    border: 2px solid var(--input-border);
     border-radius: 12px;
     transition: all 0.3s ease;
-    background: var(--light);
+    background: var(--input-bg);
+    color: var(--text-primary);
 }
 
 .form-control:focus {
     border-color: var(--primary);
     box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
     outline: none;
-    background: white;
+    background: var(--input-bg);
 }
 
 /* Botões Aprimorados */
@@ -334,37 +372,41 @@ body {
 
 /* Tabela Aprimorada */
 .table-container {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--card-bg);
     border-radius: 20px;
     box-shadow: var(--shadow-lg);
     overflow: hidden;
     animation: fadeInUp 1s ease-out;
+    border: 1px solid var(--border-color);
 }
 
 .table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
+    color: var(--text-primary);
 }
 
 .table thead {
-    background: var(--gradient-primary);
+    background: var(--bg-secondary);
 }
 
 .table th {
-    color: white;
+    color: var(--text-primary);
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.85rem;
     letter-spacing: 0.5px;
     padding: 1.25rem 1.5rem;
     text-align: left;
+    border-bottom: 2px solid var(--border-color);
 }
 
 .table td {
     padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
+    border-bottom: 1px solid var(--border-color);
     transition: all 0.3s ease;
+    color: var(--text-secondary);
 }
 
 .table tbody tr {
@@ -372,7 +414,7 @@ body {
 }
 
 .table tbody tr:hover {
-    background: rgba(67, 97, 238, 0.02);
+    background: var(--hover-bg);
     transform: scale(1.01);
 }
 
@@ -394,6 +436,8 @@ body {
     color: white;
     position: relative;
     overflow: hidden;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
 }
 
 .btn-action::after {
@@ -424,6 +468,7 @@ body {
 
 .btn-action:hover {
     transform: translateY(-3px) scale(1.05);
+    background: var(--hover-bg);
 }
 
 .btn-action i {
@@ -599,4 +644,295 @@ body {
         width: 100%;
         justify-content: center;
     }
+}
+
+/* Estado vazio */
+.empty-state {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: white;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    margin-top: 2rem;
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+.empty-state h3 {
+    color: var(--dark);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    color: var(--gray);
+    font-size: 0.95rem;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Animação de fade in */
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Estilos do botão de tema */
+.theme-toggle {
+    background: transparent;
+    border: 2px solid var(--border-color);
+    padding: 8px;
+    cursor: pointer;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: rgba(67, 97, 238, 0.1);
+    transform: translateY(-2px);
+}
+
+.theme-toggle:active {
+    transform: translateY(0);
+}
+
+.theme-toggle i {
+    font-size: 1.2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+
+.light-icon {
+    color: #f1c40f;
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(90deg) scale(0.5);
+}
+
+.dark-icon {
+    color: var(--primary);
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0) scale(1);
+}
+
+[data-theme="dark"] .light-icon {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0) scale(1);
+}
+
+[data-theme="dark"] .dark-icon {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-90deg) scale(0.5);
+}
+
+/* Aplicar cores do tema */
+.card, .main-card, .dashboard-header, .table-container {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+.table th {
+    color: var(--text-primary);
+}
+
+.table td {
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+.table tbody tr:hover {
+    background: var(--hover-bg);
+}
+
+/* Estilos do Header */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.theme-toggle {
+    background: transparent;
+    border: 2px solid var(--border-color);
+    padding: 8px;
+    cursor: pointer;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background: rgba(67, 97, 238, 0.1);
+    transform: translateY(-2px);
+}
+
+.theme-toggle:active {
+    transform: translateY(0);
+}
+
+.theme-toggle i {
+    font-size: 1.2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+
+.light-icon {
+    color: #f1c40f;
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(90deg) scale(0.5);
+}
+
+.dark-icon {
+    color: var(--primary);
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0) scale(1);
+}
+
+[data-theme="dark"] .light-icon {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(0) scale(1);
+}
+
+[data-theme="dark"] .dark-icon {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(-90deg) scale(0.5);
+}
+
+/* Responsividade do header */
+@media (max-width: 768px) {
+    .header-actions {
+        gap: 0.5rem;
+    }
+
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+/* Status badges no modo escuro */
+[data-theme="dark"] .status-badge.status-active {
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+[data-theme="dark"] .status-badge.status-inactive {
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
+
+/* Empty state no modo escuro */
+[data-theme="dark"] .empty-state {
+    background: var(--card-bg);
+}
+
+[data-theme="dark"] .empty-state-icon {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .empty-state h3 {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .empty-state p {
+    color: var(--text-secondary);
+}
+
+/* Scrollbar no modo escuro */
+[data-theme="dark"] ::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border: 3px solid var(--bg-primary);
+}
+
+/* Inputs com ícones */
+[data-theme="dark"] .input-icon {
+    color: var(--text-secondary);
+}
+
+/* Alertas no modo escuro */
+[data-theme="dark"] .alert-success {
+    background: rgba(46, 204, 113, 0.2);
+    color: #2ecc71;
+}
+
+[data-theme="dark"] .alert-danger {
+    background: rgba(231, 76, 60, 0.2);
+    color: #e74c3c;
+}
+
+/* Cards de estatísticas no modo escuro */
+[data-theme="dark"] .stat-icon {
+    background: rgba(67, 97, 238, 0.2);
+}
+
+[data-theme="dark"] .stat-icon.products {
+    background: rgba(67, 97, 238, 0.2);
+    color: var(--primary);
+}
+
+[data-theme="dark"] .stat-icon.sales {
+    background: rgba(46, 204, 113, 0.2);
+    color: var(--success);
+}
+
+[data-theme="dark"] .stat-icon.users {
+    background: rgba(52, 152, 219, 0.2);
+    color: var(--info);
+}
+
+/* Botões de ação no modo escuro */
+[data-theme="dark"] .btn-action {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .btn-action:hover {
+    background: var(--hover-bg);
+}
+
+/* Placeholder text no modo escuro */
+[data-theme="dark"] ::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
 }

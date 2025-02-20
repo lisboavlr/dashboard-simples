@@ -23,15 +23,21 @@ include "verificar-autenticacao.php";
                 <i class="fas fa-tachometer-alt"></i>
                 Dashboard de Produtos
             </div>
-            <div class="user-menu">
-                <span class="user-info">
-                    <i class="fas fa-user-circle"></i>
-                    <?php echo $_SESSION['nome'] ?? 'Usuário'; ?>
-                </span>
-                <a href="logout.php" class="btn btn-logout">
-                    <i class="fas fa-sign-out-alt"></i>
-                    Sair
-                </a>
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
+                    <i class="fas fa-sun light-icon"></i>
+                    <i class="fas fa-moon dark-icon"></i>
+                </button>
+                <div class="user-menu">
+                    <span class="user-info">
+                        <i class="fas fa-user-circle"></i>
+                        <?php echo $_SESSION['nome'] ?? 'Usuário'; ?>
+                    </span>
+                    <a href="logout.php" class="btn-logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Sair
+                    </a>
+                </div>
             </div>
         </header>
 
@@ -42,7 +48,7 @@ include "verificar-autenticacao.php";
                     <i class="fas fa-box"></i>
                 </div>
                 <div class="stat-info">
-                    <h3>150</h3>
+                    <h3>0</h3>
                     <p>Total de Produtos</p>
                 </div>
             </div>
@@ -51,7 +57,7 @@ include "verificar-autenticacao.php";
                     <i class="fas fa-shopping-cart"></i>
                 </div>
                 <div class="stat-info">
-                    <h3>R$ 45.500</h3>
+                    <h3>R$ 0</h3>
                     <p>Vendas do Mês</p>
                 </div>
             </div>
@@ -60,7 +66,7 @@ include "verificar-autenticacao.php";
                     <i class="fas fa-users"></i>
                 </div>
                 <div class="stat-info">
-                    <h3>1.250</h3>
+                    <h3>0</h3>
                     <p>Clientes Ativos</p>
                 </div>
             </div>
@@ -104,48 +110,62 @@ include "verificar-autenticacao.php";
             </div>
         </div>
 
-        <!-- Tabela de Produtos -->
-        <div class="table-container">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th><i class="fas fa-hashtag"></i> ID</th>
-                        <th><i class="fas fa-box"></i> Produto</th>
-                        <th><i class="fas fa-dollar-sign"></i> Preço</th>
-                        <th><i class="fas fa-info-circle"></i> Status</th>
-                        <th><i class="fas fa-cogs"></i> Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    // Seu código PHP para listar produtos aqui
-                    // Exemplo de uma linha:
-                    ?>
-                    <tr>
-                        <td>1</td>
-                        <td>Produto Exemplo</td>
-                        <td>R$ 99,90</td>
-                        <td>
-                            <span class="status-badge status-active">
-                                <i class="fas fa-check-circle"></i> Ativo
-                            </span>
-                        </td>
-                        <td>
-                            <div class="table-actions">
-                                <a href="editar.php?id=1" class="btn-action btn-edit">
-                                    <i class="fas fa-edit"></i>
-                                </a>
-                                <a href="excluir.php?id=1" class="btn-action btn-delete">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <!-- Tabela de Produtos - Só aparece se houver produtos -->
+        <?php
+        // Assumindo que você tem uma variável $produtos com os dados
+        // Pode ser do banco de dados ou de outra fonte
+        $tem_produtos = !empty($produtos); // ou qualquer outra lógica que verifique se há produtos
+        ?>
+        <?php if ($tem_produtos): ?>
+            <div class="table-container fade-in">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-hashtag"></i> ID</th>
+                            <th><i class="fas fa-box"></i> Produto</th>
+                            <th><i class="fas fa-dollar-sign"></i> Preço</th>
+                            <th><i class="fas fa-info-circle"></i> Status</th>
+                            <th><i class="fas fa-cogs"></i> Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($produtos as $produto): ?>
+                            <tr>
+                                <td><?php echo $produto['id']; ?></td>
+                                <td><?php echo $produto['nome']; ?></td>
+                                <td>R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></td>
+                                <td>
+                                    <span class="status-badge status-active">
+                                        <i class="fas fa-check-circle"></i> Ativo
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="table-actions">
+                                        <a href="editar.php?id=<?php echo $produto['id']; ?>" class="btn-action btn-edit">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="excluir.php?id=<?php echo $produto['id']; ?>" class="btn-action btn-delete">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php else: ?>
+            <div class="empty-state fade-in">
+                <div class="empty-state-icon">
+                    <i class="fas fa-box-open"></i>
+                </div>
+                <h3>Nenhum produto cadastrado</h3>
+                <p>Comece adicionando seu primeiro produto usando o formulário acima.</p>
+            </div>
+        <?php endif; ?>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/theme.js"></script>
 </body>
 </html>
