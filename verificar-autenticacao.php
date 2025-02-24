@@ -1,7 +1,9 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
-$tempo_limite = 10; // 10
+$tempo_limite = 60; // 60 segundos
 $tempo_atual = time();
 
 if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true) {

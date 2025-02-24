@@ -1,16 +1,4 @@
 :root {
-    /* Tema claro (padrão) */
-    --bg-primary: #f6f8fd;
-    --bg-secondary: #ffffff;
-    --bg-input: #ffffff;
-    --text-primary: #2c3e50;
-    --text-secondary: #6c757d;
-    --border-color: #e9ecef;
-    --card-bg: #ffffff;
-    --input-border: #e0e0e0;
-    --input-bg: #ffffff;
-    --stat-card-bg: #ffffff;
-    --hover-bg: rgba(67, 97, 238, 0.05);
     --primary: #4361ee;
     --primary-dark: #3046b1;
     --secondary: #3f37c9;
@@ -19,31 +7,12 @@
     --danger: #e74c3c;
     --info: #3498db;
     --shadow: rgba(0, 0, 0, 0.1);
-    --dark: #2c3e50;
-    --gray: #95a5a6;
-    --light: #f8f9fa;
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
     --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
     --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     --gradient-success: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
     --gradient-danger: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
     --gradient-info: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-}
-
-/* Tema escuro */
-[data-theme="dark"] {
-    --bg-primary: #1a1c23;
-    --bg-secondary: #242631;
-    --bg-input: #2d303e;
-    --text-primary: #e9ecef;
-    --text-secondary: #adb5bd;
-    --border-color: #2d3748;
-    --card-bg: #242631;
-    --input-border: #3d4251;
-    --input-bg: #2d303e;
-    --stat-card-bg: #2d303e;
-    --hover-bg: rgba(67, 97, 238, 0.1);
-    --shadow: rgba(0, 0, 0, 0.3);
 }
 
 /* Animações Globais */
@@ -81,11 +50,11 @@
     }
 }
 
-/* Layout Base com Animação */
+/* Layout Base */
 body {
-    background: var(--bg-primary);
+    background-color: #f8f9fa;
+    color: #2c3e50;
     font-family: 'Poppins', sans-serif;
-    color: var(--text-primary);
     line-height: 1.6;
     min-height: 100vh;
 }
@@ -97,13 +66,13 @@ body {
     animation: fadeInUp 0.6s ease-out;
 }
 
-/* Header da Dashboard Aprimorado */
+/* Header e Cards */
 .dashboard-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 2rem;
-    background: rgba(255, 255, 255, 0.95);
+    background: #ffffff;
     padding: 1.5rem 2rem;
     border-radius: 20px;
     box-shadow: var(--shadow-lg);
@@ -128,7 +97,6 @@ body {
     animation: float 3s ease-in-out infinite;
 }
 
-/* Cards de Estatísticas Melhorados */
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -137,7 +105,7 @@ body {
 }
 
 .stat-card {
-    background: var(--stat-card-bg);
+    background: #ffffff;
     padding: 2rem;
     border-radius: 20px;
     box-shadow: var(--shadow);
@@ -148,7 +116,7 @@ body {
     position: relative;
     overflow: hidden;
     animation: fadeInUp 0.6s ease-out;
-    border: 1px solid var(--border-color);
+    border: 1px solid #e9ecef;
 }
 
 .stat-card::before {
@@ -210,38 +178,37 @@ body {
     font-size: 2.2rem;
     font-weight: 700;
     margin: 0;
-    color: var(--text-primary);
+    color: #2c3e50;
     line-height: 1.2;
 }
 
 .stat-info p {
     margin: 0.5rem 0 0;
-    color: var(--text-secondary);
+    color: #6c757d;
     font-size: 1rem;
     font-weight: 500;
 }
 
-/* Card Principal Aprimorado */
 .main-card {
-    background: var(--card-bg);
+    background: #ffffff;
     border-radius: 20px;
     box-shadow: var(--shadow-lg);
     margin-bottom: 2rem;
     overflow: hidden;
     animation: fadeInUp 0.8s ease-out;
-    border: 1px solid var(--border-color);
+    border: 1px solid #e9ecef;
 }
 
 .card-header {
-    background: var(--bg-secondary);
-    color: white;
+    background: #f8f9fa;
+    color: #2c3e50;
     padding: 1.75rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
     overflow: hidden;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid #e9ecef;
 }
 
 .card-header::after {
@@ -280,40 +247,35 @@ body {
 
 /* Formulário Aprimorado */
 .form-group {
-    margin-bottom: 2rem;
-    animation: fadeInUp 0.4s ease-out;
+    margin-bottom: 1.5rem;
 }
 
 .form-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #2c3e50;
     font-weight: 500;
-    color: var(--text-primary);
-    margin-bottom: 0.75rem;
-    display: block;
-    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
 }
 
-.form-control, 
-.form-select, 
-input[type="text"],
-input[type="number"],
-input[type="email"],
-input[type="password"],
-textarea {
-    width: 100%;
-    padding: 1rem 1.25rem;
-    font-size: 1rem;
-    border: 2px solid var(--input-border);
-    border-radius: 12px;
+.form-label i {
+    color: #6c757d;
+}
+
+.form-control {
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+    color: #2c3e50;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
     transition: all 0.3s ease;
-    background: var(--input-bg);
-    color: var(--text-primary);
 }
 
 .form-control:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(67, 97, 238, 0.1);
-    outline: none;
-    background: var(--input-bg);
+    box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.2);
+    background: #ffffff;
 }
 
 /* Botões Aprimorados */
@@ -372,50 +334,65 @@ textarea {
 
 /* Tabela Aprimorada */
 .table-container {
-    background: var(--card-bg);
+    background: #ffffff;
     border-radius: 20px;
     box-shadow: var(--shadow-lg);
     overflow: hidden;
     animation: fadeInUp 1s ease-out;
-    border: 1px solid var(--border-color);
+    border: 1px solid #e9ecef;
+    margin: 2rem auto;
+    max-width: 1200px;
 }
 
 .table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    color: var(--text-primary);
+    margin-bottom: 0;
+    border-collapse: collapse;
+    table-layout: fixed;
+    text-align: center;
+    font-size: 1.1rem;
 }
 
 .table thead {
-    background: var(--bg-secondary);
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid #e9ecef;
 }
 
 .table th {
-    color: var(--text-primary);
+    color: #2c3e50;
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.85rem;
     letter-spacing: 0.5px;
     padding: 1.25rem 1.5rem;
-    text-align: left;
-    border-bottom: 2px solid var(--border-color);
+    text-align: center;
+    border-bottom: 2px solid #e9ecef;
+    pointer-events: none !important;
+    transform: none !important;
+    transition: none !important;
 }
 
 .table td {
     padding: 1.25rem 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    transition: all 0.3s ease;
-    color: var(--text-secondary);
+    border-bottom: 1px solid #e9ecef;
+    transition: none !important;
+    color: #6c757d;
+    pointer-events: none !important;
+    transform: none !important;
+    vertical-align: middle;
 }
 
 .table tbody tr {
-    transition: all 0.3s ease;
+    transition: none !important;
 }
 
 .table tbody tr:hover {
-    background: var(--hover-bg);
-    transform: scale(1.01);
+    transform: none !important;
+    transition: none !important;
+    background-color: transparent !important;
 }
 
 /* Ações na Tabela */
@@ -432,12 +409,14 @@ textarea {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    transition: none !important;
     color: white;
     position: relative;
     overflow: hidden;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    pointer-events: none !important;
+    transform: none !important;
 }
 
 .btn-action::after {
@@ -467,14 +446,17 @@ textarea {
 }
 
 .btn-action:hover {
-    transform: translateY(-3px) scale(1.05);
-    background: var(--hover-bg);
+    transform: none !important;
+    transition: none !important;
+    background: rgba(67, 97, 238, 0.05);
 }
 
 .btn-action i {
     font-size: 1.1rem;
     position: relative;
     z-index: 1;
+    pointer-events: none !important;
+    transform: none !important;
 }
 
 /* Status Badges */
@@ -567,22 +549,21 @@ textarea {
 
 /* Scrollbar Personalizada */
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
-    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 5px;
+    background: #c1c1c1;
+    border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-dark);
+    background: #a8a8a8;
 }
 
 /* Adicione estes estilos ao seu arquivo dashboard.css */
@@ -590,90 +571,95 @@ textarea {
 .user-menu {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    justify-content: center;
+    background: #f8f9fa;
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    gap: 1rem;
 }
 
 .user-info {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--dark);
-    font-weight: 500;
-    font-size: 0.95rem;
+    color: #2c3e50;
 }
 
-.user-info i {
-    font-size: 1.5rem;
-    color: var(--primary);
-}
-
-.btn-logout {
-    background: linear-gradient(135deg, #ff4b4b 0%, #e63e3e 100%);
-    color: white;
-    padding: 0.6rem 1.2rem;
-    border-radius: 10px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    text-decoration: none;
+.user-actions {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(230, 62, 62, 0.2);
+    gap: 0.8rem;
 }
 
-.btn-logout:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(230, 62, 62, 0.3);
-    color: white;
+/* Estilo para os botões de ícone */
+.btn-edit-profile,
+.btn-logout {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border: 1px solid #e9ecef;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #2c3e50;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: none !important;
 }
 
+.btn-edit-profile i,
 .btn-logout i {
     font-size: 1.1rem;
 }
 
-/* Responsividade para o menu do usuário */
+.btn-edit-profile:hover,
+.btn-logout:hover {
+    background: rgba(67, 97, 238, 0.05);
+    transform: none !important;
+    transition: none !important;
+}
+
+/* Remove texto, mantém apenas ícone */
+.btn-edit-profile span,
+.btn-logout span {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .user-menu {
-        flex-direction: column;
-        gap: 1rem;
-        width: 100%;
+        padding: 0.5rem;
     }
-
+    
+    .btn-edit-profile,
     .btn-logout {
-        width: 100%;
-        justify-content: center;
+        width: 32px;
+        height: 32px;
     }
 }
 
 /* Estado vazio */
 .empty-state {
     text-align: center;
-    padding: 3rem 2rem;
-    background: white;
+    padding: 40px 20px;
+    background: #ffffff;
     border-radius: 15px;
-    box-shadow: var(--shadow);
-    margin-top: 2rem;
 }
 
 .empty-state-icon {
-    font-size: 4rem;
-    color: var(--gray);
-    margin-bottom: 1.5rem;
-    animation: float 3s ease-in-out infinite;
+    font-size: 48px;
+    color: #a0aec0;
+    margin-bottom: 20px;
 }
 
 .empty-state h3 {
-    color: var(--dark);
+    color: #2c3e50;
     font-size: 1.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 10px;
 }
 
 .empty-state p {
-    color: var(--gray);
-    font-size: 0.95rem;
-    max-width: 400px;
-    margin: 0 auto;
+    color: #718096;
 }
 
 /* Animação de fade in */
@@ -701,7 +687,7 @@ textarea {
 /* Estilos do botão de tema */
 .theme-toggle {
     background: transparent;
-    border: 2px solid var(--border-color);
+    border: 2px solid #e9ecef;
     padding: 8px;
     cursor: pointer;
     position: relative;
@@ -711,16 +697,16 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    transition: none !important;
 }
 
 .theme-toggle:hover {
     background: rgba(67, 97, 238, 0.1);
-    transform: translateY(-2px);
+    transform: none !important;
 }
 
 .theme-toggle:active {
-    transform: translateY(0);
+    transform: none !important;
 }
 
 .theme-toggle i {
@@ -729,7 +715,7 @@ textarea {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition: all 0.3s ease;
+    transition: none !important;
 }
 
 .light-icon {
@@ -744,33 +730,23 @@ textarea {
     transform: translate(-50%, -50%) rotate(0) scale(1);
 }
 
-[data-theme="dark"] .light-icon {
-    opacity: 1;
-    transform: translate(-50%, -50%) rotate(0) scale(1);
-}
-
-[data-theme="dark"] .dark-icon {
-    opacity: 0;
-    transform: translate(-50%, -50%) rotate(-90deg) scale(0.5);
-}
-
 /* Aplicar cores do tema */
 .card, .main-card, .dashboard-header, .table-container {
-    background: var(--card-bg);
-    border-color: var(--border-color);
+    background: #ffffff;
+    border-color: #e9ecef;
 }
 
 .table th {
-    color: var(--text-primary);
+    color: #2c3e50;
 }
 
 .table td {
-    color: var(--text-secondary);
-    border-color: var(--border-color);
+    color: #6c757d;
+    border-color: #e9ecef;
 }
 
 .table tbody tr:hover {
-    background: var(--hover-bg);
+    background: rgba(67, 97, 238, 0.05);
 }
 
 /* Estilos do Header */
@@ -782,7 +758,7 @@ textarea {
 
 .theme-toggle {
     background: transparent;
-    border: 2px solid var(--border-color);
+    border: 2px solid #e9ecef;
     padding: 8px;
     cursor: pointer;
     position: relative;
@@ -792,16 +768,16 @@ textarea {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
+    transition: none !important;
 }
 
 .theme-toggle:hover {
-    background: rgba(67, 97, 238, 0.1);
-    transform: translateY(-2px);
+    background: rgba(67, 97, 238, 0.05);
+    transform: none !important;
 }
 
 .theme-toggle:active {
-    transform: translateY(0);
+    transform: none !important;
 }
 
 .theme-toggle i {
@@ -810,7 +786,7 @@ textarea {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    transition: all 0.3s ease;
+    transition: none !important;
 }
 
 .light-icon {
@@ -825,14 +801,44 @@ textarea {
     transform: translate(-50%, -50%) rotate(0) scale(1);
 }
 
-[data-theme="dark"] .light-icon {
-    opacity: 1;
-    transform: translate(-50%, -50%) rotate(0) scale(1);
+/* Alinhamento específico para as células de dados */
+.table tbody td {
+    text-align: center !important;
+    vertical-align: middle !important;
 }
 
-[data-theme="dark"] .dark-icon {
-    opacity: 0;
-    transform: translate(-50%, -50%) rotate(-90deg) scale(0.5);
+/* Ajuste específico para cada tipo de dado */
+.table tbody td:nth-child(1) { /* ID */
+    text-align: center !important;
+}
+
+.table tbody td:nth-child(2) { /* Nome */
+    text-align: left !important; /* Alinha texto à esquerda */
+    padding-left: 2rem !important;
+}
+
+.table tbody td:nth-child(3) { /* Descrição */
+    text-align: left !important; /* Alinha texto à esquerda */
+    padding-left: 2rem !important;
+}
+
+.table tbody td:nth-child(4) { /* Preço */
+    text-align: center !important;
+}
+
+.table tbody td:nth-child(5) { /* Quantidade */
+    text-align: center !important;
+}
+
+/* Ajuste dos cabeçalhos */
+.table thead th {
+    text-align: center !important;
+}
+
+.table thead th:nth-child(2), /* Nome */
+.table thead th:nth-child(3) { /* Descrição */
+    text-align: left !important;
+    padding-left: 2rem !important;
 }
 
 /* Responsividade do header */
@@ -847,92 +853,849 @@ textarea {
     }
 }
 
-/* Status badges no modo escuro */
-[data-theme="dark"] .status-badge.status-active {
-    background: rgba(46, 204, 113, 0.2);
-    color: #2ecc71;
-}
-
-[data-theme="dark"] .status-badge.status-inactive {
-    background: rgba(231, 76, 60, 0.2);
-    color: #e74c3c;
-}
-
-/* Empty state no modo escuro */
-[data-theme="dark"] .empty-state {
-    background: var(--card-bg);
-}
-
-[data-theme="dark"] .empty-state-icon {
-    color: var(--text-secondary);
-}
-
-[data-theme="dark"] .empty-state h3 {
-    color: var(--text-primary);
-}
-
-[data-theme="dark"] .empty-state p {
-    color: var(--text-secondary);
-}
-
 /* Scrollbar no modo escuro */
-[data-theme="dark"] ::-webkit-scrollbar-track {
-    background: var(--bg-primary);
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
 }
 
-[data-theme="dark"] ::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border: 3px solid var(--bg-primary);
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border: 3px solid #f1f1f1;
 }
 
 /* Inputs com ícones */
-[data-theme="dark"] .input-icon {
-    color: var(--text-secondary);
+.input-icon {
+    color: #6c757d;
 }
 
-/* Alertas no modo escuro */
-[data-theme="dark"] .alert-success {
-    background: rgba(46, 204, 113, 0.2);
+/* Estilos para a foto de perfil */
+.profile-pic {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+.profile-photo-container {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #e9ecef;
+}
+
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-photo-container i {
+    font-size: 100px;
+    color: #2c3e50;
+}
+
+/* Ajuste mais rigoroso para a foto no header */
+.user-info img.profile-pic,
+.profile-pic {
+    width: 25px !important;
+    height: 25px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 6px;
+    vertical-align: middle;
+    min-width: 25px;
+    min-height: 25px;
+    max-width: 25px;
+    max-height: 25px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: #2c3e50;
+    font-weight: 500;
+    font-size: 0.95rem;
+    width: 100%;
+}
+
+.user-info i.fa-user-circle {
+    font-size: 40px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2c3e50;
+}
+
+/* Aumentando o ícone no menu */
+.menu .user-info i.fa-user-circle {
+    font-size: 50px; /* Aumentado para 50px */
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2c3e50;
+}
+
+/* Ajustando o menu para o ícone maior */
+.menu .user-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    padding: 1rem; /* Aumentado o padding */
+    border-radius: 10px;
+    gap: 1.2rem; /* Aumentado o gap */
+}
+
+/* Ajustando os botões de ação */
+.menu .btn-edit-profile,
+.menu .btn-logout {
+    width: 42px; /* Aumentado proporcionalmente */
+    height: 42px;
+}
+
+.menu .btn-edit-profile i,
+.menu .btn-logout i {
+    font-size: 1.3rem; /* Aumentado o tamanho dos ícones dos botões */
+}
+
+/* Seletor mais específico para o ícone no menu lateral */
+.sidebar .menu .user-info i.fa-user-circle,
+.sidebar .menu .user-info .fa-user-circle,
+nav.sidebar .menu .user-info i.fa-user-circle {
+    font-size: 65px !important; /* Forçando o tamanho com !important */
+    width: 65px !important;
+    height: 65px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2c3e50;
+    margin: 5px 0;
+}
+
+/* Ajustando o container do menu */
+.sidebar .menu .user-menu,
+nav.sidebar .menu .user-menu {
+    padding: 1.2rem;
+    gap: 1.5rem;
+}
+
+/* Ajustando os botões de ação proporcionalmente */
+.sidebar .menu .btn-edit-profile,
+.sidebar .menu .btn-logout {
+    width: 45px;
+    height: 45px;
+}
+
+.sidebar .menu .btn-edit-profile i,
+.sidebar .menu .btn-logout i {
+    font-size: 1.4rem;
+}
+
+/* Estilo para a foto de perfil */
+.user-info .profile-pic {
+    width: 65px !important;
+    height: 65px !important;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Estilo para o ícone padrão quando não há foto */
+.header-actions .user-info i.fa-user-circle,
+.header-actions .user-info .fa-user-circle {
+    font-size: 65px !important;
+    width: 65px !important;
+    height: 65px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Reorganização do menu do usuário */
+.header-actions .user-menu {
+    display: flex;
+    flex-direction: row-reverse; /* Inverte a ordem dos elementos */
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    padding: 0.8rem;
+}
+
+/* Ajuste dos botões de ação */
+.user-actions {
+    display: flex;
+    gap: 0.8rem;
+    margin-right: 1rem; /* Espaço entre os botões e a foto */
+}
+
+/* Mantendo o estilo dos botões */
+.btn-edit-profile,
+.btn-logout {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #e9ecef;
+    color: #2c3e50;
+    cursor: pointer;
+    transition: none !important;
+}
+
+/* Ajuste da informação do usuário */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Aumentando a foto/ícone do usuário no menu da dashboard */
+.user-info .profile-pic,
+.user-info i.fa-user-circle,
+.user-info .fa-user-circle,
+.header-actions .user-info img {
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Garantindo que a imagem carregada mantenha o tamanho */
+.header-actions .user-info img.profile-pic {
+    min-width: 100px !important;
+    min-height: 100px !important;
+    max-width: 100px !important;
+    max-height: 100px !important;
+}
+
+/* Ajustando o container para a foto maior */
+.header-actions .user-menu {
+    padding: 1.2rem;
+    gap: 1.5rem;
+}
+
+/* Ajustando os botões de ação proporcionalmente */
+.btn-edit-profile,
+.btn-logout {
+    width: 52px;
+    height: 52px;
+}
+
+.btn-edit-profile i,
+.btn-logout i {
+    font-size: 1.3rem;
+}
+
+.alert {
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.alert i {
+    margin-right: 8px;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+/* Estilo para a tabela de produtos */
+.table-responsive {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+    color: #2c3e50;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+    transition: background-color 0.2s ease;
+}
+
+.table td, .table th {
+    padding: 15px;
+    vertical-align: middle;
+}
+
+/* Estilo para quando não há produtos */
+.no-products {
+    text-align: center;
+    padding: 40px 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.no-products i {
+    font-size: 48px;
+    color: #6c757d;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.no-products h3 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.no-products p {
+    color: #6c757d;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+/* Estilo para o preço */
+.price-column {
+    font-weight: 600;
     color: #2ecc71;
 }
 
-[data-theme="dark"] .alert-danger {
-    background: rgba(231, 76, 60, 0.2);
-    color: #e74c3c;
+/* Estilo para a quantidade */
+.quantity-column {
+    font-weight: 600;
+    color: #3498db;
 }
 
-/* Cards de estatísticas no modo escuro */
-[data-theme="dark"] .stat-icon {
-    background: rgba(67, 97, 238, 0.2);
+/* Container principal dos produtos */
+.products-container {
+    padding: 25px;
+    margin-top: 30px;
+    border-radius: 15px;
 }
 
-[data-theme="dark"] .stat-icon.products {
-    background: rgba(67, 97, 238, 0.2);
-    color: var(--primary);
+/* Cabeçalho da seção */
+.products-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e9ecef;
 }
 
-[data-theme="dark"] .stat-icon.sales {
-    background: rgba(46, 204, 113, 0.2);
-    color: var(--success);
+.products-header h3 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
 }
 
-[data-theme="dark"] .stat-icon.users {
-    background: rgba(52, 152, 219, 0.2);
-    color: var(--info);
+/* Tabela básica */
+.table {
+    width: 100%;
+    margin: 0;
 }
 
-/* Botões de ação no modo escuro */
-[data-theme="dark"] .btn-action {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
+.table th {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    font-weight: 600;
+    padding: 15px;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    border-bottom: 2px solid #e9ecef;
 }
 
-[data-theme="dark"] .btn-action:hover {
-    background: var(--hover-bg);
+.table td {
+    padding: 15px;
+    border-bottom: 1px solid #e9ecef;
+    color: #2c3e50;
 }
 
-/* Placeholder text no modo escuro */
-[data-theme="dark"] ::placeholder {
-    color: var(--text-secondary);
-    opacity: 0.6;
+/* Colunas */
+.product-name {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.price-column {
+    color: #2ecc71;
+    font-weight: 600;
+}
+
+.quantity-column {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.quantity-column i {
+    margin-right: 5px;
+}
+
+/* Estado vazio */
+.no-products {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.no-products i {
+    font-size: 56px;
+    color: #a0aec0;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.no-products h3 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.no-products p {
+    color: #718096;
+    font-size: 1rem;
+}
+
+/* Desativa todas as transições e efeitos hover do Bootstrap */
+.table {
+    pointer-events: none !important;
+}
+
+.table tr,
+.table td,
+.table th {
+    pointer-events: none !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+.table tbody tr:hover {
+    transform: none !important;
+    transition: none !important;
+    background-color: transparent !important;
+}
+
+/* Força a remoção de qualquer efeito hover */
+* {
+    transition: none !important;
+}
+
+/* Scrollbar Personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Cores Base */
+:root {
+    --primary: #4361ee;
+    --primary-dark: #3046b1;
+    --secondary: #3f37c9;
+    --success: #2ecc71;
+    --warning: #f1c40f;
+    --danger: #e74c3c;
+    --info: #3498db;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    --gradient-success: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    --gradient-danger: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+    --gradient-info: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+}
+
+/* Animações Globais */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Layout Base */
+body {
+    background-color: #f8f9fa;
+    color: #2c3e50;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.dashboard-container {
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Header e Cards */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    background: #ffffff;
+    padding: 1.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
+    animation: slideIn 0.5s ease-out;
+}
+
+.dashboard-title {
+    font-size: 2rem;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Tabela Principal */
+.products-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.products-table th,
+.products-table td {
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* Alinhamento específico para cada coluna */
+.products-table th:nth-child(1),
+.products-table td:nth-child(1) { /* Nome */
+    width: 25%;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.products-table th:nth-child(2),
+.products-table td:nth-child(2) { /* Descrição */
+    width: 35%;
+    text-align: left;
+    padding-left: 20px;
+}
+
+.products-table th:nth-child(3),
+.products-table td:nth-child(3) { /* Preço */
+    width: 15%;
+    text-align: center;
+}
+
+.products-table th:nth-child(4),
+.products-table td:nth-child(4) { /* Quantidade */
+    width: 15%;
+    text-align: center;
+}
+
+.products-table th:nth-child(5),
+.products-table td:nth-child(5) { /* Ações */
+    width: 120px; /* Largura fixa para a coluna */
+    padding-right: 30px; /* Mais espaço à direita */
+}
+
+/* Cabeçalho da tabela */
+.products-table thead th {
+    background-color: var(--primary);
+    color: white;
+    font-weight: 600;
+}
+
+/* Ajuste para as ações */
+.products-table .actions {
+    display: flex;
+    justify-content: flex-end; /* Alinha os botões à direita */
+    align-items: center;
+    gap: 15px;
+    padding-right: 10px; /* Espaço adicional à direita */
+}
+
+.products-table .edit-btn,
+.products-table .delete-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.products-table .edit-btn {
+    color: #ffc107;
+}
+
+.products-table .delete-btn {
+    color: #dc3545;
+}
+
+.products-table .edit-btn:hover {
+    background-color: #fff3cd;
+    color: #e0a800;
+}
+
+.products-table .delete-btn:hover {
+    background-color: #f8d7da;
+    color: #c82333;
+}
+
+/* Estado Vazio */
+.no-products {
+    text-align: center;
+    padding: 40px 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: var(--shadow-sm);
+}
+
+.no-products i {
+    font-size: 48px;
+    color: #a0aec0;
+    margin-bottom: 20px;
+}
+
+.no-products h3 {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.no-products p {
+    color: #718096;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 1rem;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .products-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+/* Scrollbar Personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Perfil do Usuário */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.user-profile img,
+.user-profile i {  /* Adicionado seletor para o ícone */
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--primary);
+}
+
+.user-profile i {  /* Estilo específico para o ícone */
+    background-color: #f8f9fa;
+    color: #718096;
+    font-size: 20px;
+}
+
+.user-profile .user-info {
+    font-size: 0.9rem; /* Reduzido de 1rem */
+}
+
+.user-profile .user-name {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.1rem; /* Reduzido de 0.2rem */
+}
+
+.user-profile .user-role {
+    color: #718096;
+    font-size: 0.8rem; /* Reduzido de 0.9rem */
+}
+
+/* Alinhamento da Tabela de Produtos */
+.table thead th,
+.table tbody td {
+    text-align: center !important;
+    vertical-align: middle !important;
+    padding: 1.5rem !important;
+    width: auto;  /* Permite que as colunas se ajustem ao conteúdo */
+}
+
+/* Define larguras específicas para cada coluna */
+.table th:nth-child(1), /* ID */
+.table td:nth-child(1) {
+    width: 10%;
+}
+
+.table th:nth-child(2), /* Nome */
+.table td:nth-child(2) {
+    width: 25%;
+}
+
+.table th:nth-child(3), /* Descrição */
+.table td:nth-child(3) {
+    width: 35%;
+}
+
+.table th:nth-child(4), /* Preço */
+.table td:nth-child(4) {
+    width: 15%;
+}
+
+.table th:nth-child(5), /* Quantidade */
+.table td:nth-child(5) {
+    width: 15%;
+}
+
+/* Garante que o conteúdo das células fique alinhado */
+.table th,
+.table td {
+    white-space: nowrap;  /* Evita quebra de linha */
+    overflow: hidden;
+    text-overflow: ellipsis;  /* Adiciona ... quando o texto é muito longo */
+    max-width: 0;  /* Necessário para text-overflow funcionar */
+}
+
+/* Permite que descrições longas quebrem em múltiplas linhas */
+.table td:nth-child(3) {
+    white-space: normal;  /* Permite quebra de linha na descrição */
+    max-width: none;  /* Remove a limitação de largura */
+}
+
+/* Mantém o estilo consistente para todas as células */
+.product-name,
+.price-column,
+.quantity-column {
+    margin: 0 auto;
+    display: block;
+}
+
+/* Ajuste específico para a coluna de descrição */
+.products-table th,
+.products-table td {
+    padding: 12px 15px;
+    vertical-align: middle;
+}
+
+.products-table th {
+    text-align: center !important;
+}
+
+.products-table td {
+    text-align: center !important;
+}
+
+/* Ajustes específicos para nome e descrição */
+.products-table td:nth-child(1), /* Nome */
+.products-table td:nth-child(2) { /* Descrição */
+    text-align: left !important;
+    padding-left: 20px !important;
+}
+
+.products-table th:nth-child(1), /* Cabeçalho Nome */
+.products-table th:nth-child(2) { /* Cabeçalho Descrição */
+    text-align: left !important;
+    padding-left: 20px !important;
 }
