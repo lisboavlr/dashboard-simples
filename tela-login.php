@@ -24,10 +24,6 @@ if(isset($_COOKIE['lembrar_email']) && isset($_COOKIE['lembrar_senha'])) {
     <link href="css/login.css" rel="stylesheet">
 </head>
 <body>
-    <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
-        <i class="fas fa-sun light-icon"></i>
-        <i class="fas fa-moon dark-icon"></i>
-    </button>
 
     <!-- Adicione este HTML logo após a abertura do body -->
     <div class="loading-overlay">
@@ -115,6 +111,21 @@ if(isset($_COOKIE['lembrar_email']) && isset($_COOKIE['lembrar_senha'])) {
                     alert.style.transition = 'opacity 0.5s ease';
                     setTimeout(() => alert.remove(), 500);
                 }, 5000);
+            });
+
+            // Adiciona evento de tecla para o formulário inteiro
+            document.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    const form = document.getElementById('loginForm');
+                    const email = document.getElementById('email').value;
+                    const password = document.getElementById('password').value;
+                    
+                    // Verifica se os campos estão preenchidos
+                    if (email && password) {
+                        e.preventDefault();
+                        form.dispatchEvent(new Event('submit'));
+                    }
+                }
             });
         });
 
@@ -208,7 +219,5 @@ if(isset($_COOKIE['lembrar_email']) && isset($_COOKIE['lembrar_senha'])) {
             }, 300);
         });
     </script>
-
-    <script src="js/theme.js"></script>
 </body>
 </html>

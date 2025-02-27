@@ -4,7 +4,10 @@ ini_set('display_errors', 1);
 
 // Função para carregar produtos do arquivo JSON
 function carregarProdutos() {
-    $arquivo = 'produtos.json';
+    $arquivo = 'dados/produtos.json';
+    if (!file_exists('dados')) {
+        mkdir('dados', 0777, true);
+    }
     if (file_exists($arquivo)) {
         $json = file_get_contents($arquivo);
         return json_decode($json, true) ?: [];
@@ -14,7 +17,10 @@ function carregarProdutos() {
 
 // Função para salvar produtos no arquivo JSON
 function salvarProdutos($produtos) {
-    $arquivo = 'produtos.json';
+    $arquivo = 'dados/produtos.json';
+    if (!file_exists('dados')) {
+        mkdir('dados', 0777, true);
+    }
     file_put_contents($arquivo, json_encode($produtos, JSON_PRETTY_PRINT));
 }
 
@@ -96,68 +102,71 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Dashboard - Cadastro de Produtos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="css/dashboard.css" rel="stylesheet">
     <style>
     .alert-success {
-        padding: 15px 40px 15px 20px;
-        margin: 20px 0;
-        border: 2px solid #28a745;
-        border-radius: 15px;
-        background-color: #d4edda;
-        color: #155724;
-        position: relative;
-        animation: glowingSuccess 2s infinite;
-        box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
+        padding: 1rem 1.5rem;
+        margin: 1.5rem auto;
+        max-width: 800px;
+        border-left: 4px solid #28a745;
+        background-color: #f8fff9;
+        color: #1e7e34;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-size: 16px;
+        font-size: 1rem;
+        font-weight: 500;
+        position: relative;
+        animation: slideInDown 0.3s ease-out, fadeIn 0.3s ease-out;
+    }
+
+    .alert-success::before {
+        content: '\f058';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        margin-right: 12px;
+        font-size: 1.2rem;
+        color: #28a745;
     }
 
     .alert-success .close-btn {
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%);
         background: none;
         border: none;
-        color: #155724;
-        font-size: 20px;
+        color: #1e7e34;
+        font-size: 1.2rem;
         cursor: pointer;
-        padding: 5px;
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
+        padding: 0.25rem 0.5rem;
+        opacity: 0.7;
+        transition: all 0.2s ease;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.3s ease;
+        border-radius: 4px;
     }
 
     .alert-success .close-btn:hover {
+        opacity: 1;
         background-color: rgba(40, 167, 69, 0.1);
     }
 
-    @keyframes glowingSuccess {
-        0% {
-            box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
-        }
-        50% {
-            box-shadow: 0 0 20px rgba(40, 167, 69, 0.8);
-        }
-        100% {
-            box-shadow: 0 0 10px rgba(40, 167, 69, 0.5);
-        }
-    }
-
-    @keyframes slideIn {
+    @keyframes slideInDown {
         from {
-            transform: translateY(-100%);
-            opacity: 0;
+            transform: translateY(-20px);
         }
         to {
             transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
             opacity: 1;
         }
     }
@@ -271,9 +280,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <?php if (isset($_SESSION['sucesso'])): ?>
-            <div class="alert-success">
-                <span><?php echo $_SESSION['sucesso']; ?></span>
-                <button class="close-btn" type="button">&times;</button>
+            <div class="alert-success" role="alert">
+                <div class="alert-content">
+                    <?php echo $_SESSION['sucesso']; ?>
+                </div>
+                <button type="button" class="close-btn" aria-label="Fechar">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
             <?php unset($_SESSION['sucesso']); ?>
         <?php endif; ?>
@@ -281,17 +294,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Header da Dashboard -->
         <header class="dashboard-header">
             <div class="dashboard-title">
-                <i class="fas fa-tachometer-alt"></i>
-                Dashboard de Produtos
+                <i class="fa-solid fa-house-laptop"></i>
+                Dashboard
             </div>
             <div class="header-actions">
-                <!-- Remova ou comente este trecho -->
-                <!--
-                <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema">
-                    <i class="fas fa-sun light-icon"></i>
-                    <i class="fas fa-moon dark-icon"></i>
-                </button>
-                -->
+                <a href="clientes.php" class="btn btn-outline-primary me-2">
+                    <i class="fas fa-users"></i> Clientes
+                </a>
                 <div class="user-menu">
                     <span class="user-info">
                         <?php if (!empty($_SESSION['foto_perfil'])): ?>

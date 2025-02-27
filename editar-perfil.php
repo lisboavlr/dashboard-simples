@@ -1,13 +1,120 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 include "verificar-autenticacao.php";
+
+// Debug para verificar o conteúdo da sessão
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Verificar se o usuário está logado e tem email
+if (!isset($_SESSION['logado']) || !isset($_SESSION['email'])) {
+    $_SESSION['msg'] = "Por favor, faça login novamente.";
+    header("Location: tela-login.php");
+    exit;
+}
+
+// Função para carregar dados do usuário do JSON
+function carregarDadosUsuario($email) {
+    // Debug
+    error_log("Tentando carregar dados para o email: " . ($email ?? 'null'));
+    
+    // Verificação mais rigorosa do email
+    if (!isset($email) || !is_string($email) || trim($email) === '') {
+        error_log("Email inválido ou vazio");
+        return null;
+    }
+
+    $arquivo_json = 'dados/usuarios.json';
+    if (file_exists($arquivo_json)) {
+        $conteudo = file_get_contents($arquivo_json);
+        if ($conteudo === false) {
+            error_log("Erro ao ler o arquivo JSON");
+            return null;
+        }
+        
+        $usuarios = json_decode($conteudo, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            error_log("Erro ao decodificar JSON: " . json_last_error_msg());
+            return null;
+        }
+        
+        foreach ($usuarios as $id => $usuario) {
+            if (isset($usuario['email']) && $usuario['email'] === $email) {
+                return ['id' => $id, 'dados' => $usuario];
+            }
+        }
+        error_log("Usuário não encontrado no JSON");
+    } else {
+        error_log("Arquivo JSON não existe");
+    }
+    return null;
+}
+
+// Função para salvar dados do usuário em JSON
+function salvarDadosUsuario($nome, $foto_perfil) {
+    // Verificar se existe um email na sessão
+    $email = $_SESSION['email'] ?? '';
+    if (empty($email)) {
+        return false;
+    }
+
+    $arquivo_json = 'dados/usuarios.json';
+    $diretorio = dirname($arquivo_json);
+    
+    // Criar diretório se não existir
+    if (!file_exists($diretorio)) {
+        mkdir($diretorio, 0777, true);
+    }
+    
+    // Carregar dados existentes ou criar array vazio
+    if (file_exists($arquivo_json)) {
+        $usuarios = json_decode(file_get_contents($arquivo_json), true);
+    } else {
+        $usuarios = [];
+    }
+    
+    // Usar email como identificador único
+    $dados_usuario = carregarDadosUsuario($email);
+    $id_usuario = $dados_usuario ? $dados_usuario['id'] : uniqid();
+    
+    // Atualizar ou adicionar dados do usuário
+    $usuarios[$id_usuario] = [
+        'nome' => $nome,
+        'foto_perfil' => $foto_perfil,
+        'email' => $email,
+        'ultima_atualizacao' => date('Y-m-d H:i:s')
+    ];
+    
+    // Salvar no arquivo JSON
+    return file_put_contents($arquivo_json, json_encode($usuarios, JSON_PRETTY_PRINT));
+}
+
+// Carregar dados do usuário ao entrar na página
+$email = $_SESSION['email'] ?? '';
+if (empty($email)) {
+    $_SESSION['msg'] = "Sessão expirada. Por favor, faça login novamente.";
+    header("Location: tela-login.php");
+    exit;
+}
+
+$dados_usuario = carregarDadosUsuario($email);
+if ($dados_usuario && !isset($_SESSION['nome'])) {
+    $_SESSION['nome'] = $dados_usuario['dados']['nome'];
+    $_SESSION['foto_perfil'] = $dados_usuario['dados']['foto_perfil'];
+}
 
 // Processar o formulário quando enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nome_atual = $_SESSION['nome'] ?? '';
+    $foto_atual = $_SESSION['foto_perfil'] ?? '';
+    
     // Processar atualização do nome
     if (isset($_POST['nome']) && !empty($_POST['nome'])) {
-        $_SESSION['nome'] = $_POST['nome'];
-        // Aqui você deve adicionar o código para atualizar no banco de dados
-        // Exemplo: $sql = "UPDATE usuarios SET nome = ? WHERE id = ?";
+        $nome_atual = $_POST['nome'];
+        $_SESSION['nome'] = $nome_atual;
     }
 
     // Processar upload da foto
@@ -29,13 +136,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Upload da foto
             if (move_uploaded_file($foto['tmp_name'], $diretorio . $novo_nome)) {
                 // Atualizar nome da foto na sessão
-                $_SESSION['foto_perfil'] = $novo_nome;
-                
-                // Aqui você deve adicionar o código para atualizar no banco de dados
-                // Exemplo: $sql = "UPDATE usuarios SET foto_perfil = ? WHERE id = ?";
-                
-                header("Location: index.php");
-                exit;
+                $foto_atual = $novo_nome;
+                $_SESSION['foto_perfil'] = $foto_atual;
             } else {
                 $erro = "Erro ao fazer upload da foto.";
             }
@@ -44,10 +146,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     
-    // Se chegou aqui sem foto, apenas redireciona
+    // Salvar dados no JSON
     if (!isset($erro)) {
-        header("Location: index.php");
-        exit;
+        if (salvarDadosUsuario($nome_atual, $foto_atual)) {
+            header("Location: index.php");
+            exit;
+        } else {
+            $erro = "Erro ao salvar os dados do usuário.";
+        }
     }
 }
 ?>

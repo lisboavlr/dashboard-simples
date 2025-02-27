@@ -17,6 +17,29 @@ if($_POST){
     if($email == "ADM@LULU" && $password == "123"){
         $_SESSION['logado'] = true;
         $_SESSION['ultimo_acesso'] = time();
+        $_SESSION['email'] = $email;
+        
+        // Carregar dados existentes ou definir padrões
+        $arquivo_json = 'dados/usuarios.json';
+        if (file_exists($arquivo_json)) {
+            $usuarios = json_decode(file_get_contents($arquivo_json), true);
+            $usuario_encontrado = false;
+            if ($usuarios) {
+                foreach ($usuarios as $usuario) {
+                    if (isset($usuario['email']) && $usuario['email'] === $email) {
+                        $_SESSION['nome'] = $usuario['nome'];
+                        $_SESSION['foto_perfil'] = $usuario['foto_perfil'];
+                        $usuario_encontrado = true;
+                        break;
+                    }
+                }
+            }
+            if (!$usuario_encontrado) {
+                $_SESSION['nome'] = "Usuário";
+            }
+        } else {
+            $_SESSION['nome'] = "Usuário";
+        }
 
         //vai lembrar o usuario e senha por 30 dias
         if($lembrar) {
